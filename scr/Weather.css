@@ -14,7 +14,7 @@ h3 {
   font-size: 100px;
   color: #f3c623;
   position: relative;
-  top: -135px;
+  top: -15px;
   left: 195px;
 }
 .temp {
@@ -67,3 +67,4 @@ footer{
   padding: 20px 50px;
   max-width: 900px;
 }
+

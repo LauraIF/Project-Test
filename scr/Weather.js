@@ -95,14 +95,17 @@ button.addEventListener("click", getCurrentPosition);
 function search(event) {
     event.preventDefault();
     let input = document.querySelector("#inputText");
-    let key = "4bb3cd86107d7863d59c27f509800ed3";
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${
-        input.value
-        }&appid=${key}&units=metric`;
-    axios.get(url).then(showTemperature);
+    if (input.value === "") {
+        alert("Please type something 🌍");
+    } else {
+        let key = "4bb3cd86107d7863d59c27f509800ed3";
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${
+            input.value
+            }&appid=${key}&units=metric`;
+        axios.get(url).then(showTemperature);
+    }
 }
 
 let form = document.querySelector("form");
 form.addEventListener("submit", search);
-
 
