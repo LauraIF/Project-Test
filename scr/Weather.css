@@ -53,6 +53,11 @@ h3 {
   color: white;
   font-weight: bold;
 }
+
+footer{
+    text-align: center;
+    color: white;
+}
 .container {
   background-image: url("../images/blue.jpg");
   background-size: cover;
