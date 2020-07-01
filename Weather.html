@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather</title>
+    <link href="scr/Weather.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+    <script src="https://kit.fontawesome.com/16b037978f.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-7">
+                <h1><i class="fas fa-map-marker-alt"></i> Lisbon</h1>
+                <h2></h2>
+                <h3></h3>
+                <p class="emoji"><i class="fas fa-sun"></i></p>
+            </div>
+
+            <div class="col">
+                <div class="search">
+                    <form>
+                        <input type="text" autofocus="on" autocomplete="off" placeholder="Enter your city" class="bar"
+                            id="inputText" />
+                        <button type="submit" class="btn btn-outline-light">
+                            <i class="fas fa-search-location"></i>
+                        </button>
+                        <button id="current" type="click" class="btn btn-outline-light">
+                            <i class="far fa-compass"></i>
+                        </button>
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-8">
+                <div class="temp">
+                    <span class="temperature"> 25</span> <span class="units"> <a href="#" id="celsiusLink">ºC |</a><a
+                            href="#" id="fahrenheitLink">ºF</a> </span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="details">
+                    <span class="wind"> <i class="fas fa-wind"></i> 5km/h</span> </br>
+                    <span class="rain"> <i class="fas fa-tint"></i> 10 %</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-deck">
+            <div class="p-3 mb-2 bg-transparent text-dark  text-center " style="max-width: 18rem;">
+                <div class="card-header">Sun</div>
+                <div class="card-body text-primary">
+                    <h5 class="card-title"><i class="fas fa-cloud-sun"></i></h5>
+                    <p class="card-text">
+                        25ºC
+                    </p>
+                </div>
+            </div>
+            <div class="p-3  bg-transparent text-dark  text-center " style="max-width: 18rem;">
+                <div class="card-header">Mon</div>
+                <div class="card-body text-primary">
+                    <h5 class="card-title"><i class="fas fa-sun"></i></h5>
+                    <p class="card-text">
+                        27ºC
+                    </p>
+                </div>
+            </div>
+            <div class="p-3  bg-transparent text-dark  text-center " style="max-width: 18rem;">
+                <div class="card-header">Tue</div>
+                <div class="card-body text-primary">
+                    <h5 class="card-title"><i class="fas fa-cloud-sun-rain"></i></h5>
+                    <p class="card-text">
+                        25ºC
+                    </p>
+                </div>
+            </div>
+            <div class="p-3  bg-transparent text-dark  text-center " style="max-width: 18rem;">
+                <div class="card-header">Wed</div>
+                <div class="card-body text-primary">
+                    <h5 class="card-title"><i class="fas fa-sun"></i></h5>
+                    <p class="card-text">
+                        26ºC
+                    </p>
+                </div>
+            </div>
+            <div class="p-3 bg-transparent text-dark text-center " style="max-width: 18rem;">
+                <div class="card-header">Thu</div>
+                <div class="card-body text-primary">
+                    <h5 class="card-title"><i class="fas fa-cloud-sun"></i></h5>
+                    <p class="card-text">
+                        27ºC
+                    </p>
+                </div>
+            </div>
+        </div>
+        <p><a href="">Open-Sourced</a> by Laura</p>
+    </div>
+    <script src="scr/Weather.js"></script>
+</body>
+
+</html>

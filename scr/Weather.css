@@ -1,0 +1,64 @@
+h1,
+h2,
+h3 {
+  color: white;
+  font-family: "Open Sans", sans-serif;
+  margin-top: 25px;
+}
+
+.search {
+  margin-top: 50px;
+}
+
+.emoji {
+  font-size: 100px;
+  color: #f3c623;
+  position: relative;
+  top: -135px;
+  left: 195px;
+}
+.temp {
+  font-size: 80px;
+  color: white;
+  font-family: "Open Sans", sans-serif;
+  margin-top: -120px;
+}
+.units a {
+  font-size: 17px;
+  font-weight: bold;
+  position: relative;
+  top: -48px;
+  color: white;
+}
+
+.details {
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  margin-top: -95px;
+}
+
+.bar {
+  background-color: rgba(220, 223, 238, 0.87);
+  border-color: white;
+}
+
+.card-deck {
+  margin-top: 10px;
+  justify-content: center;
+}
+.card-text,
+.card-header,
+.card-title {
+  color: white;
+  font-weight: bold;
+}
+.container {
+  background-image: url("../images/blue.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  margin: 50px auto;
+  padding: 20px 50px;
+  max-width: 900px;
+}
