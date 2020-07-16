@@ -1,67 +1,89 @@
 //Date
 
-let now = new Date();
+function formatDate(timestamp) {
+  let now = new Date(timestamp);
+  let date = now.getDate();
+  let months = [
+    "Jan",
+    "Feb",
+    "March",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let month = months[now.getMonth()];
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Sat",
+  ];
+  let day = days[now.getDay()];
+  let hours = now.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = now.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
 
-let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-let day = days[now.getDay()];
-
-let months = [
-  "Jan",
-  "Feb",
-  "March",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-let month = months[now.getMonth()];
-
-let date = now.getDate();
-
-let today = `${day} , ${date} ${month}`;
-
-let h2 = document.querySelector("h2");
-h2.innerHTML = `${today}  `;
+  return ` ${date} ${month} | ${day} ${hours}:${minutes}`;
+}
 
 //Units conversion
 
 function fahrenheit(event) {
   event.preventDefault();
-  let temperature = 25;
-  let tempF = Math.round(temperature * 1.8 + 32);
-
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let tempF = Math.round(celsiusTemperature * 1.8 + 32);
   document.querySelector(".temperature").innerHTML = tempF;
 }
+
+let celsiusTemperature = null;
 
 let fahrenheitLink = document.querySelector("#fahrenheitLink");
 fahrenheitLink.addEventListener("click", fahrenheit);
 
 function celsius(event) {
   event.preventDefault();
-  let temperature = 25;
-  document.querySelector(".temperature").innerHTML = temperature;
+  document.querySelector(".temperature").innerHTML = celsiusTemperature;
 }
 let celsiusLink = document.querySelector("#celsiusLink");
 celsiusLink.addEventListener("click", celsius);
 
 // Geo->Temp
 function showTemperature(response) {
-  let number = Math.round(response.data.main.temp);
   let temperature = document.querySelector(".temperature");
-  temperature.innerHTML = `${number}`;
+  temperature.innerHTML = Math.round(response.data.main.temp);
   let h1 = document.querySelector("h1");
   h1.innerHTML = `<i class="fas fa-map-marker-alt" ></i > ${response.data.name}`;
   let h3 = document.querySelector("h3");
-  h3.innerHTML = ` ${response.data.weather[0].description}`;
+  h3.innerHTML = response.data.weather[0].description;
   let wind = document.querySelector(".wind");
-  wind.innerHTML = `<i class="fas fa-wind" ></i> ${response.data.wind.speed}km/h`;
+  wind.innerHTML = `<i class="fas fa-wind" ></i> ${Math.round(
+    response.data.wind.speed
+  )} km/h`;
   let rain = document.querySelector(".rain");
-  rain.innerHTML = `<i class="fas fa-tint" ></i> ${response.data.main.humidity}%`;
+  rain.innerHTML = `<i class="fas fa-tint" ></i> ${response.data.main.humidity} %`;
+  let h2 = document.querySelector("h2");
+  h2.innerHTML = formatDate(response.data.dt * 1000);
+  let img = document.querySelector("img");
+  img.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  celsiusTemperature = Math.round(response.data.main.temp);
 }
 
 function showPosition(position) {
@@ -80,19 +102,36 @@ function getCurrentPosition() {
 let button = document.querySelector("#current");
 button.addEventListener("click", getCurrentPosition);
 
-//Insert city -> Temp
+// Forecast
+function showForecast(response) {
 
-function search(event) {
+
+}
+
+//API Insert Temp
+
+function search(city) {
+  let key = "4bb3cd86107d7863d59c27f509800ed3";
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
+  axios.get(url).then(showTemperature);
+
+// API Forecast
+    apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}&units=metric`;
+    axios.get(url).then(showForecast);
+}
+
+// Insert City -> Temp
+function handle(event) {
   event.preventDefault();
   let input = document.querySelector("#inputText");
   if (input.value === "") {
     alert("Please type something 🌍");
   } else {
-    let key = "4bb3cd86107d7863d59c27f509800ed3";
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${key}&units=metric`;
-    axios.get(url).then(showTemperature);
+    search(input.value);
   }
 }
 
 let form = document.querySelector("form");
-form.addEventListener("submit", search);
+form.addEventListener("submit", handle);
+
+search("Lisbon");
