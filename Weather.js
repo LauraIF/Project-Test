@@ -40,6 +40,19 @@ function formatDate(timestamp) {
   return ` ${date} ${month} | ${day} ${hours}:${minutes}`;
 }
 
+function formatHours(timestamp) {
+  let now = new Date(timestamp);
+  let hours = now.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = now.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${hours}:${minutes}`;
+}
+
 //Units conversion
 
 function fahrenheit(event) {
@@ -62,7 +75,7 @@ function celsius(event) {
 let celsiusLink = document.querySelector("#celsiusLink");
 celsiusLink.addEventListener("click", celsius);
 
-// Geo->Temp
+// SHOW REAL DATA (TEMP+RAIN+CITY+DATE)
 function showTemperature(response) {
   let temperature = document.querySelector(".temperature");
   temperature.innerHTML = Math.round(response.data.main.temp);
@@ -86,12 +99,41 @@ function showTemperature(response) {
   celsiusTemperature = Math.round(response.data.main.temp);
 }
 
+// Forecast
+function showForecast(response) {
+  let forecast = document.querySelector(".card-deck");
+  forecast.innerHTML = null;
+  let firstForecast = null;
+
+  for (let index = 0; index < 4; index++) {
+    firstForecast = response.data.list[index];
+    forecast.innerHTML += `<div class="p-3 mb-2 bg-transparent text-dark  text-center " style="max-width: 18rem;">
+    <div class="card-header">${formatHours(firstForecast.dt * 1000)}</div>
+      <div class="card-body text-primary">
+          <img class="card-title" src="http://openweathermap.org/img/wn/${
+      firstForecast.weather[0].icon
+          }@2x.png"/>
+
+       </div>
+       <p class="card-text">
+        ${Math.round(firstForecast.main.temp)} ºC
+        </p>
+      </div>
+   </div>
+   </div>`;
+  }
+}
+// API GEO
 function showPosition(position) {
   let key = "4bb3cd86107d7863d59c27f509800ed3";
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
   axios.get(url).then(showTemperature);
+
+  // API GEO Forecast
+  url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
+  axios.get(url).then(showForecast);
 }
 
 function getCurrentPosition() {
@@ -102,22 +144,16 @@ function getCurrentPosition() {
 let button = document.querySelector("#current");
 button.addEventListener("click", getCurrentPosition);
 
-// Forecast
-function showForecast(response) {
-
-
-}
-
-//API Insert Temp
+//API Insert CIty
 
 function search(city) {
   let key = "4bb3cd86107d7863d59c27f509800ed3";
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
   axios.get(url).then(showTemperature);
 
-// API Forecast
-    apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}&units=metric`;
-    axios.get(url).then(showForecast);
+  // API Insert City Forecast
+  url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}&units=metric`;
+  axios.get(url).then(showForecast);
 }
 
 // Insert City -> Temp
