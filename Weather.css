@@ -14,7 +14,7 @@ h3 {
   margin-top: 50px;
 }
 
-img {
+.emoji img {
   font-size: 100px;
   color: #f3c623;
   position: relative;
@@ -35,7 +35,6 @@ img {
   top: -48px;
   color: white;
 }
-
 
 .details {
   font-family: "Open Sans", sans-serif;
