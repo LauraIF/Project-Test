@@ -25,7 +25,7 @@ function formatDate(timestamp) {
     "Wednesday",
     "Thursday",
     "Friday",
-    "Sat",
+    "Saturday",
   ];
   let day = days[now.getDay()];
   let hours = now.getHours();
