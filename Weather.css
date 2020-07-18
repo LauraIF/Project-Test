@@ -1,25 +1,29 @@
-h1,
 h2,
 h3 {
   color: white;
   font-family: "Open Sans", sans-serif;
-  margin-top: 25px;
+  margin-top: 4px;
   font-weight: 900;
 }
 
+h1 {
+  color: white;
+  font-family: "Open Sans", sans-serif;
+  margin-top: 60px;
+  font-weight: 900;
+}
 h3 {
   text-transform: capitalize;
 }
 .search {
-  margin-top: 50px;
+  margin-top: 65px;
 }
 
 .emoji img {
   font-size: 100px;
   color: #f3c623;
   position: relative;
-  top: -80px;
-  left: 210px;
+  left: 170px;
 }
 .temp {
   font-size: 80px;
@@ -48,6 +52,7 @@ h3 {
   background-color: rgba(220, 223, 238, 0.87);
   border-color: white;
 }
+
 
 .card-deck {
   margin-top: 10px;
