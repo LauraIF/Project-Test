@@ -111,7 +111,7 @@ function showForecast(response) {
     <div class="card-header">${formatHours(firstForecast.dt * 1000)}</div>
       <div class="card-body text-primary">
           <img class="card-title" src="http://openweathermap.org/img/wn/${
-      firstForecast.weather[0].icon
+            firstForecast.weather[0].icon
           }@2x.png"/>
 
        </div>
